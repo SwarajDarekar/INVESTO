@@ -8,3 +8,5 @@ for crypto section:
 
 for stock section:
 1.As it is created using python library 'streamlit' use "streamlit run main.py" 
+
+Extract the node-modules.rar file
