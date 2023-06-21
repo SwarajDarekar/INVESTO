@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <link href="//db.onlinewebfonts.com/c/f21923cb0f60b46d41a66875255790b3?family=NHaasGroteskDSPro-65Md"
+        rel="stylesheet" type="text/css" />
+    <!-- Bootstrap CSS (as per normal) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- And add the Bootstrap-Dark-plugin Variant CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-dark-5@1.1.3/dist/css/bootstrap-dark-plugin.min.css"
+        rel="stylesheet">
+        <link rel="stylesheet" href="css/video.css">
+
+    <meta name="theme-color" content="#111111" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#eeeeee" media="(prefers-color-scheme: dark)">
+
+    <title>Data visualizations</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+
+<body class="bg-image" style="background-color: #0000;
+height: 100vh; ">
+
+    <form method="post">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <select class="form-select form-select-lg" aria-label=".form-select-lg example" name="selectCoin" style="width: fit-content;" onchange="this.form.submit()">
+                    <option value="">Select a crypto currency</option>
+                    <optgroup label="trending">
+                      <% cryptoList.coins.forEach((crypto) => { %>
+                        <option value="<%- crypto.item.id %>"><%- crypto.item.name %></option>
+                      <% }); %>
+                    </optgroup>
+                    <optgroup label="leading one's">
+                        <option value="avalanche-2">Avalanche (AVAX)</option>
+                        <option value="binancecoin">Binance (BNB)</option>
+                        <option value="bitcoin">Bitcoin (BTC) </option>
+                        <option value="cardano">Cardano (ADA)</option>
+                        <option value="decentraland">Decentraland (MANA)</option>
+                        <option value="dogecoin">Dogecoin (DOGE)</option>
+                        <option value="ethereum">Ethereum (ETH)</option>
+                        <option value="ripple">Ripple (XRP)</option>
+                        <option value="solana">Solana (SOL)</option>
+                        <option value="tether">Tether (USDT)</option>
+                      </optgroup>
+                  </select>
+                  
+                <a class="navbar-brand d-flex ml-auto display-2 text-white fs-1 fw-bold text-uppercase justify-content-between"
+                    style="font-family: 'NHaasGroteskDSPro-65Md'; ">
+                    <p style="padding-right:20px; padding-top:10px; "> <%- mData.market_data.market_cap_rank%>.<%-
+                                mData.name %></p><img src="<%- mData.image.large %>" height="60px" width="60px">
+                </a>
+
+            </div>
+        </nav>
+    </form>
+    <br>
+    <br>
+    <section class="row m-3 mb-0" style="margin-top: 2px !important;">
+        <div class="card text-white text-center  m-3" id="firstcard"
+        style="width:10rem; background-color: rgb(43, 43, 43); margin-top: 0px !important;">
+            <div class="card-body">
+                <h6 class="card-title" style="font-family: 'NHaasGroteskDSPro-65Md';">Market Cap 24Hrs</h6>
+                <p class="card-text fw-bold fs-5" style=" color: aqua ;">
+                    <%- mData.market_data.market_cap_change_percentage_24h %> %
+                </p>
+            </div>
+        </div>
+        <div class="card text-white text-center  m-3"
+            style="width:10rem; background-color: rgb(43, 43, 43); margin-top: 0px !important;">
+            <div class="card-body">
+                <h6 class="card-title" style="font-family: 'NHaasGroteskDSPro-65Md';">All Time High</h6>
+                <p class="card-text fw-bold fs-5" style="color: aqua ;">
+                    <%- mData.market_data.ath["inr"] %>/- rs
+                </p>
+            </div>
+        </div>
+        <div class="card text-white text-center  m-3"
+            style="width:10rem; background-color: rgb(43, 43, 43); margin-top: 0px !important;">
+            <div class="card-body">
+                <h6 class="card-title" style="font-family: 'NHaasGroteskDSPro-65Md';">All Time Low</h6>
+                <p class="card-text fw-bold fs-5" style="color: aqua ;">
+                    <%- mData.market_data.atl["inr"] %>/- rs
+                </p>
+            </div>
+        </div>
+
+        <div class="card text-white text-center  m-3"
+            style="width:10rem; background-color: rgb(43, 43, 43); margin-top: 0px !important;">
+            <div class="card-body">
+                <h6 class="card-title" style="font-family: 'NHaasGroteskDSPro-65Md';">Positive Sentiments </h6>
+                <p class="card-text fw-bold fs-5" style="color: aqua ;">
+                    <%- mData.sentiment_votes_up_percentage %> %
+                </p>
+            </div>
+        </div>
+        <div class="card text-white text-center  m-3"
+            style="width:10rem; background-color: rgb(43, 43, 43); margin-top: 0px !important;">
+            <div class="card-body">
+                <h6 class="card-title" style="font-family: 'NHaasGroteskDSPro-65Md';"> High 24Hrs </h6>
+                <p class="card-text fw-bold fs-5" style="color: rgb(51, 255, 0) ;">
+                    <%- mData.market_data.high_24h["inr"] %>/- rs <i class="fa-solid fa-up"></i>
+                </p>
+            </div>
+        </div>
+        <div class="card text-white text-center  m-3"
+            style="width:10rem; background-color: rgb(43, 43, 43); margin-top: 0px !important;">
+            <div class="card-body">
+                <h6 class="card-title" style="font-family: 'NHaasGroteskDSPro-65Md';"> Low 24Hrs </h6>
+                <p class="card-text fw-bold fs-5" style="color: rgb(255, 32, 32) ;">
+                    <%- mData.market_data.low_24h["inr"] %>/- rs
+                </p>
+            </div>
+        </div>
+    </section>
+    <div>
+        <div class="text-white text-center"
+            style="font-family: 'NHaasGroteskDSPro-65Md'; overflow: visible; height:2px; margin-top: 1%;"> 
+            Current Price</div>
+        <div style="font-family: 'NHaasGroteskDSPro-65Md'; font-size:60px; 
+    font-weight: 700; color: rgb(0, 255, 255); text-decoration: none solid rgb(255, 255, 255);  
+      text-align: center; ">
+            <%- mData.market_data.current_price["inr"] %>/- rs
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8" id="chart1" style=" max-width: 610px; "></div>
+            <div id="division2" class="col-sm-8 .offset-sm-3 " style="max-width:200px;">
+
+                <div class="card-body ">
+                    <h6 class="card-title" style="font-family: 'NHaasGroteskDSPro-65Md';"> Market Cap </h6>
+                    <p class="card-text fw-bold "
+                        style="font-family: 'NHaasGroteskDSPro-65Md'; color: rgb(255, 255, 255) ; font-size: small;">
+                        <%- mData.market_data.market_cap['inr'] %>/-
+                    </p>
+                </div>
+
+                <div class="card-body ">
+                    <h6 class="card-title" style="font-family: 'NHaasGroteskDSPro-65Md';"> Price Change 24hrs </h6>
+                    <p class="card-text fw-bold "
+                        style="font-family: 'NHaasGroteskDSPro-65Md'; color: rgb(255, 255, 255) ; font-size: small;">
+                        <%- mData.market_data.price_change_24h_in_currency['inr'] %>/-
+                    </p>
+                </div>
+                <div class="card-body ">
+                    <h6 class="card-title" style="font-family: 'NHaasGroteskDSPro-65Md';"> Total Volume </h6>
+                    <p class="card-text fw-bold "
+                        style="font-family: 'NHaasGroteskDSPro-65Md'; color: rgb(255, 255, 255) ; font-size: small;">
+                        <%- mData.market_data.total_volume['inr']%>/-
+                    </p>
+                </div>
+
+                <div class="card-body ">
+                    <h6 class="card-title" style="font-family: 'NHaasGroteskDSPro-65Md';"> Twitter Followers</h6>
+                    <p class="card-text fw-bold "
+                        style="font-family: 'NHaasGroteskDSPro-65Md'; color: rgb(255, 255, 255) ; font-size: small;">
+                        <%= mData.community_data.twitter_followers %> people's
+                    </p>
+
+                </div>
+                <div class="card-body" id="submitbutton">
+                    <h6 class="card-title" style="font-family: 'NHaasGroteskDSPro-65Md';"> </h6>
+                    <p class="card-text fw-bold " 
+                        style="font-family: 'NHaasGroteskDSPro-65Md'; color: rgb(255, 255, 255) ; font-size: small;">
+                        <button class="btn btn-warning  
+                        onclick="window.location.href='https://www.binance.com/en/trade/<%- mData.symbol.toUpperCase() %>_USDT?theme=dark&type=spot'">Trade</button>
+                    </p>
+                </div>
+
+
+
+
+            </div>
+            <div class="col" style=" max-width: 310px;">
+                <div id="chart2"></div>
+                <div id="chart3"></div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- ////////////////////////////////chart 1 MARKET CAP -->
+    <script>
+    let OHLC = '<%- JSON.stringify(oChart)%>'
+        OHLC = String(OHLC)
+        OHLC = JSON.parse(OHLC)
+
+      var options = {
+          series: [{
+            name: 'ohlc chart',
+            data: OHLC
+        }],
+          chart: {
+          type: 'candlestick',
+          height: 350
+        },
+        title: {
+          text: 'OHLC CHART',
+          style: {
+                    color: "#FFD700",
+                    fontSize: '35px',
+                    fontWeight: 'bold'
+                }
+        },
+        xaxis: {
+          type: 'datetime',
+          color: "#FFD700"
+                
+        },
+        yaxis: {
+          tooltip: {
+            enabled: true
+          }
+        },
+        fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.9,
+                    stops: [0, 100]
+                }
+            },
+            colors: ["#ff0000", "#ff0000"],
+            tooltip: {
+                y: {
+                    formatter: (value) => { return value.toFixed(2) }
+                },
+                theme: "dark"
+            }
+        };
+
+        var chart1 = new ApexCharts(document.querySelector("#chart1"), options);
+        chart1.render();
+    </script>
+    <!-- ////////////////////////////////chart 2 MARKET PRICE -->
+    <script>
+
+        let marketPrice = '<%- JSON.stringify(mChart.prices)%>'
+        marketPrice = String(marketPrice)
+        marketPrice = JSON.parse(marketPrice)
+        var options = {
+            chart: {
+
+                type: 'area',
+
+            }, grid: {
+                show: false
+            },
+
+            title: {
+                text: "Market Price",
+                style: {
+                    color: "#ff0000",
+                    fontSize: '14px',
+                    fontWeight: 'bold'
+                },
+            },
+            series: [{
+                name: 'Market Price',
+                data: marketPrice
+            }],
+            xaxis: {
+                type: "datetime"
+            },
+            yaxis: {
+                show: false
+            },
+            dataLabels: {
+                enabled: false
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.9,
+                    stops: [0, 100]
+                }
+            },
+            colors: ["#ff0000", "#ff0000"],
+            tooltip: {
+                y: {
+                    formatter: (value) => { return value.toFixed(2) }
+                },
+                theme: "dark"
+            }
+        }
+
+
+        var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
+
+        chart2.render();
+    </script>
+    <!-- ////////////////////////////////chart 3 MARKET VOLUME -->
+    <script>
+        ////////////////////////////////////////CHART 3 MARKET VOLUME
+        let marketCap = '<%- JSON.stringify(mChart.market_caps)%>'
+        marketCap = String(marketCap)
+        marketCap = JSON.parse(marketCap)
+        var options = {
+            chart: {
+
+                type: 'area',
+
+            }, grid: {
+                show: false
+            },
+
+            title: {
+                text: "Market Cap(inr)",
+                style: {
+                    color: "#00ffea",
+                    fontSize: '14px',
+                    fontWeight: 'bold'
+                },
+            },
+            series: [{
+                name: 'Market Cap',
+                data: marketCap
+            }],
+            xaxis: {
+                type: "datetime"
+            },
+            yaxis: {
+                show: false
+            },
+            dataLabels: {
+                enabled: false
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.9,
+                    stops: [0, 100]
+                }
+            },
+            colors: ["#00ffea", "#00ffea"],
+            tooltip: {
+                y: {
+                    formatter: (value) => { return value.toFixed(2) }
+                },
+                theme: "dark"
+            }
+        }
+
+      
+
+        var chart3 = new ApexCharts(document.querySelector("#chart3"), options);
+
+        chart3.render();
+
+    </script>
+</body>
+
+</html>
