@@ -1,0 +1,53 @@
+.profile {
+    z-index: 1;
+    position: absolute;
+    transition: all 0.3s;
+    height: 50px;
+    width: 50px;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+ 
+  .profile img {
+    max-width: 100%;
+    filter: drop-shadow(-20px 0 10px rgba(0, 0, 0, 0.1));
+    cursor: pointer;
+  }
+
+  .profile:not(:first-child) img {
+    margin-left: -20px;
+  }
+  
+  .profile .name {
+    position: absolute;
+    background-color: #f6f6fa;
+    color: #0c0c0c;
+    font-family: 'Oswald', sans-serif;
+            
+    padding: 15px 30px;
+    border-radius: 100px;
+    bottom: -80px; left: 50%;
+    white-space: nowrap;
+    transform: translate(-50%, -50px);
+    letter-spacing: 1px;
+    font-size: 15px;
+    opacity: 0;
+    transition: all 0.3s;
+  }
+  
+  .profile .name::before {
+    content: "";
+    position: absolute;
+    width: 15px; height: 15px;
+    background-color: #f6f6fa;
+    top: 50%; left: 5%; 
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .profile img:hover + .name {
+    opacity: 1;
+    transform: translateY(-150%);
+    margin-left: 2rem;
+    box-shadow: 0 10px 20px rgba(86, 86, 198, 0.3);
+  }

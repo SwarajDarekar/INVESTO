@@ -1,0 +1,45 @@
+video{
+   max-height: 45rem;
+}
+
+.scroll{
+    font-size: 7rem;
+    text-transform: uppercase;
+}
+#video{
+    font-size: 4rem;
+    text-transform: uppercase;
+}
+@media (max-width: 450px) and (min-height: 768px){
+    .scroll{
+        font-size: 6rem;
+        text-transform: uppercase;
+        display: flex;
+    }
+    #video{
+        font-size: 3.5rem;
+        text-transform: uppercase;
+    }
+    .two{
+        height:100vh;
+        padding-bottom: 50rem;
+    }
+    .scroll1{
+        font-size: 7rem;
+        
+    }
+    p{
+        font-size: 2rem;
+    }
+    video{
+        max-height:40rem ;
+    }
+    #section3{
+        margin-top:18rem;
+    }
+    #btnOP{
+        justify-content: center;
+        margin-left:7rem;
+    }
+    
+}
